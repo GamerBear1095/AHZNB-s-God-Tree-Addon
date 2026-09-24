@@ -1,0 +1,26 @@
+{
+  "id_map": {},
+  "mod_elements": [],
+  "variable_elements": [],
+  "sound_elements": [],
+  "language_map": {
+    "en_us": {}
+  },
+  "workspaceSettings": {
+    "modid": "ahznbsworldtreeaddon",
+    "modName": "AHZNB\u0027s World Tree Addon",
+    "version": "1.0.0",
+    "author": "admin, MCreator",
+    "websiteURL": "https://mcreator.net",
+    "disableForgeVersionCheck": true,
+    "serverSideOnly": false,
+    "requiredMods": [],
+    "dependencies": [],
+    "dependants": [],
+    "mcreatorDependencies": [],
+    "currentGenerator": "1.12.2",
+    "modElementsPackage": "net.mcreator.ahznbsworldtreeaddon",
+    "lockBaseModFiles": false
+  },
+  "mcreatorVersion": 202000214217
+}
