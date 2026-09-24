@@ -1,10 +1,35 @@
 {
   "id_map": {},
-  "mod_elements": [],
+  "mod_elements": [
+    {
+      "name": "GodTreeFruit",
+      "type": "block",
+      "sortid": 1,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "god_tree_fruit"
+    },
+    {
+      "name": "GodTreeFruitLootTable",
+      "type": "loottable",
+      "sortid": 2,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "god_tree_fruit_loot_table"
+    }
+  ],
   "variable_elements": [],
   "sound_elements": [],
   "language_map": {
-    "en_us": {}
+    "en_us": {
+      "tile.god_tree_fruit.name": "God Tree Fruit"
+    }
+  },
+  "foldersRoot": {
+    "name": "~",
+    "children": []
   },
   "workspaceSettings": {
     "modid": "ahznbsworldtreeaddon",
@@ -22,5 +47,5 @@
     "modElementsPackage": "net.mcreator.ahznbsworldtreeaddon",
     "lockBaseModFiles": false
   },
-  "mcreatorVersion": 202000214217
+  "mcreatorVersion": 202100118117
 }

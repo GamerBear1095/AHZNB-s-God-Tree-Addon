@@ -1,0 +1,10 @@
+{
+  "mappings": {
+    "default": {
+      "map": {
+        "1": "god_fruit_test"
+      },
+      "name": "default"
+    }
+  }
+}

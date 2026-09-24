@@ -1,0 +1,8 @@
+{
+  "parent": "ahznbsworldtreeaddon:custom/god_fruit",
+  "textures": {
+    "all": "ahznbsworldtreeaddon:blocks/god_fruit_test",
+    "particle": "ahznbsworldtreeaddon:blocks/god_fruit_test",
+    "1": "ahznbsworldtreeaddon:blocks/god_fruit_test"
+  }
+}

@@ -6,6 +6,34 @@
  */
 package net.mcreator.ahznbsworldtreeaddon;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.common.registry.EntityEntry;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.IGuiHandler;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.discovery.ASMDataTable;
+import net.minecraftforge.fml.common.IWorldGenerator;
+import net.minecraftforge.fml.common.IFuelHandler;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.client.event.ModelRegistryEvent;
+
+import net.minecraft.world.storage.WorldSavedData;
+import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.World;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.potion.Potion;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.block.Block;
+
 import java.util.function.Supplier;
 import java.util.Random;
 import java.util.Map;
@@ -17,7 +45,7 @@ import java.util.ArrayList;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Retention;
 
-public class ElementsAHZNBsWorldTreeAddon implements IFuelHandler, IWorldGenerator {
+public class ElementsAhznbsworldtreeaddonMod implements IFuelHandler, IWorldGenerator {
 	public final List<ModElement> elements = new ArrayList<>();
 	public final List<Supplier<Block>> blocks = new ArrayList<>();
 	public final List<Supplier<Item>> items = new ArrayList<>();
@@ -25,23 +53,23 @@ public class ElementsAHZNBsWorldTreeAddon implements IFuelHandler, IWorldGenerat
 	public final List<Supplier<EntityEntry>> entities = new ArrayList<>();
 	public final List<Supplier<Potion>> potions = new ArrayList<>();
 	public static Map<ResourceLocation, net.minecraft.util.SoundEvent> sounds = new HashMap<>();
-	public ElementsAHZNBsWorldTreeAddon() {
+	public ElementsAhznbsworldtreeaddonMod() {
 	}
 
 	public void preInit(FMLPreInitializationEvent event) {
 		try {
 			for (ASMDataTable.ASMData asmData : event.getAsmData().getAll(ModElement.Tag.class.getName())) {
 				Class<?> clazz = Class.forName(asmData.getClassName());
-				if (clazz.getSuperclass() == ElementsAHZNBsWorldTreeAddon.ModElement.class)
-					elements.add((ElementsAHZNBsWorldTreeAddon.ModElement) clazz.getConstructor(this.getClass()).newInstance(this));
+				if (clazz.getSuperclass() == ElementsAhznbsworldtreeaddonMod.ModElement.class)
+					elements.add((ElementsAhznbsworldtreeaddonMod.ModElement) clazz.getConstructor(this.getClass()).newInstance(this));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		Collections.sort(elements);
-		elements.forEach(ElementsAHZNBsWorldTreeAddon.ModElement::initElements);
-		this.addNetworkMessage(AHZNBsWorldTreeAddonVariables.WorldSavedDataSyncMessageHandler.class,
-				AHZNBsWorldTreeAddonVariables.WorldSavedDataSyncMessage.class, Side.SERVER, Side.CLIENT);
+		elements.forEach(ElementsAhznbsworldtreeaddonMod.ModElement::initElements);
+		this.addNetworkMessage(AhznbsworldtreeaddonModVariables.WorldSavedDataSyncMessageHandler.class,
+				AhznbsworldtreeaddonModVariables.WorldSavedDataSyncMessage.class, Side.SERVER, Side.CLIENT);
 	}
 
 	public void registerSounds(RegistryEvent.Register<net.minecraft.util.SoundEvent> event) {
@@ -67,13 +95,13 @@ public class ElementsAHZNBsWorldTreeAddon implements IFuelHandler, IWorldGenerat
 	@SubscribeEvent
 	public void onPlayerLoggedIn(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event) {
 		if (!event.player.world.isRemote) {
-			WorldSavedData mapdata = AHZNBsWorldTreeAddonVariables.MapVariables.get(event.player.world);
-			WorldSavedData worlddata = AHZNBsWorldTreeAddonVariables.WorldVariables.get(event.player.world);
+			WorldSavedData mapdata = AhznbsworldtreeaddonModVariables.MapVariables.get(event.player.world);
+			WorldSavedData worlddata = AhznbsworldtreeaddonModVariables.WorldVariables.get(event.player.world);
 			if (mapdata != null)
-				AHZNBsWorldTreeAddon.PACKET_HANDLER.sendTo(new AHZNBsWorldTreeAddonVariables.WorldSavedDataSyncMessage(0, mapdata),
+				AhznbsworldtreeaddonMod.PACKET_HANDLER.sendTo(new AhznbsworldtreeaddonModVariables.WorldSavedDataSyncMessage(0, mapdata),
 						(EntityPlayerMP) event.player);
 			if (worlddata != null)
-				AHZNBsWorldTreeAddon.PACKET_HANDLER.sendTo(new AHZNBsWorldTreeAddonVariables.WorldSavedDataSyncMessage(1, worlddata),
+				AhznbsworldtreeaddonMod.PACKET_HANDLER.sendTo(new AhznbsworldtreeaddonModVariables.WorldSavedDataSyncMessage(1, worlddata),
 						(EntityPlayerMP) event.player);
 		}
 	}
@@ -81,9 +109,9 @@ public class ElementsAHZNBsWorldTreeAddon implements IFuelHandler, IWorldGenerat
 	@SubscribeEvent
 	public void onPlayerChangedDimension(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent event) {
 		if (!event.player.world.isRemote) {
-			WorldSavedData worlddata = AHZNBsWorldTreeAddonVariables.WorldVariables.get(event.player.world);
+			WorldSavedData worlddata = AhznbsworldtreeaddonModVariables.WorldVariables.get(event.player.world);
 			if (worlddata != null)
-				AHZNBsWorldTreeAddon.PACKET_HANDLER.sendTo(new AHZNBsWorldTreeAddonVariables.WorldSavedDataSyncMessage(1, worlddata),
+				AhznbsworldtreeaddonMod.PACKET_HANDLER.sendTo(new AhznbsworldtreeaddonModVariables.WorldSavedDataSyncMessage(1, worlddata),
 						(EntityPlayerMP) event.player);
 		}
 	}
@@ -91,7 +119,7 @@ public class ElementsAHZNBsWorldTreeAddon implements IFuelHandler, IWorldGenerat
 	public <T extends IMessage, V extends IMessage> void addNetworkMessage(Class<? extends IMessageHandler<T, V>> handler, Class<T> messageClass,
 			Side... sides) {
 		for (Side side : sides)
-			AHZNBsWorldTreeAddon.PACKET_HANDLER.registerMessage(handler, messageClass, messageID, side);
+			AhznbsworldtreeaddonMod.PACKET_HANDLER.registerMessage(handler, messageClass, messageID, side);
 		messageID++;
 	}
 	public static class GuiHandler implements IGuiHandler {
@@ -132,9 +160,9 @@ public class ElementsAHZNBsWorldTreeAddon implements IFuelHandler, IWorldGenerat
 		@Retention(RetentionPolicy.RUNTIME)
 		public @interface Tag {
 		}
-		protected final ElementsAHZNBsWorldTreeAddon elements;
+		protected final ElementsAhznbsworldtreeaddonMod elements;
 		protected final int sortid;
-		public ModElement(ElementsAHZNBsWorldTreeAddon elements, int sortid) {
+		public ModElement(ElementsAhznbsworldtreeaddonMod elements, int sortid) {
 			this.elements = elements;
 			this.sortid = sortid;
 		}

@@ -1,6 +1,17 @@
 package net.mcreator.ahznbsworldtreeaddon;
 
-public class AHZNBsWorldTreeAddonVariables {
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.ByteBufUtils;
+
+import net.minecraft.world.storage.WorldSavedData;
+import net.minecraft.world.World;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.client.Minecraft;
+
+public class AhznbsworldtreeaddonModVariables {
 	public static class MapVariables extends WorldSavedData {
 		public static final String DATA_NAME = "ahznbsworldtreeaddon_mapvars";
 		public MapVariables() {
@@ -23,9 +34,9 @@ public class AHZNBsWorldTreeAddonVariables {
 		public void syncData(World world) {
 			this.markDirty();
 			if (world.isRemote) {
-				AHZNBsWorldTreeAddon.PACKET_HANDLER.sendToServer(new WorldSavedDataSyncMessage(0, this));
+				AhznbsworldtreeaddonMod.PACKET_HANDLER.sendToServer(new WorldSavedDataSyncMessage(0, this));
 			} else {
-				AHZNBsWorldTreeAddon.PACKET_HANDLER.sendToAll(new WorldSavedDataSyncMessage(0, this));
+				AhznbsworldtreeaddonMod.PACKET_HANDLER.sendToAll(new WorldSavedDataSyncMessage(0, this));
 			}
 		}
 
@@ -61,9 +72,9 @@ public class AHZNBsWorldTreeAddonVariables {
 		public void syncData(World world) {
 			this.markDirty();
 			if (world.isRemote) {
-				AHZNBsWorldTreeAddon.PACKET_HANDLER.sendToServer(new WorldSavedDataSyncMessage(1, this));
+				AhznbsworldtreeaddonMod.PACKET_HANDLER.sendToServer(new WorldSavedDataSyncMessage(1, this));
 			} else {
-				AHZNBsWorldTreeAddon.PACKET_HANDLER.sendToDimension(new WorldSavedDataSyncMessage(1, this), world.provider.getDimension());
+				AhznbsworldtreeaddonMod.PACKET_HANDLER.sendToDimension(new WorldSavedDataSyncMessage(1, this), world.provider.getDimension());
 			}
 		}
 
@@ -92,9 +103,9 @@ public class AHZNBsWorldTreeAddonVariables {
 			if (context.side == Side.SERVER) {
 				message.data.markDirty();
 				if (message.type == 0)
-					AHZNBsWorldTreeAddon.PACKET_HANDLER.sendToAll(message);
+					AhznbsworldtreeaddonMod.PACKET_HANDLER.sendToAll(message);
 				else
-					AHZNBsWorldTreeAddon.PACKET_HANDLER.sendToDimension(message, world.provider.getDimension());
+					AhznbsworldtreeaddonMod.PACKET_HANDLER.sendToDimension(message, world.provider.getDimension());
 			}
 			if (message.type == 0) {
 				world.getMapStorage().setData(MapVariables.DATA_NAME, message.data);
