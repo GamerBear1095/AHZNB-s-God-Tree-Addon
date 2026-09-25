@@ -32,7 +32,7 @@
       "name": "GodTreeFruitBlockDestroyedByPlayer",
       "type": "procedure",
       "sortid": 4,
-      "compiles": false,
+      "compiles": true,
       "locked_code": true,
       "ids": {},
       "registry_name": "god_tree_fruit_block_destroyed_by_player",
@@ -60,9 +60,68 @@
           }
         ]
       }
+    },
+    {
+      "name": "GodTreeOnStructureInstanceGenerated",
+      "type": "procedure",
+      "sortid": 5,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "god_tree_on_structure_instance_generated",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "GodTreeAdditionalGenerationCondition",
+      "type": "procedure",
+      "sortid": 5,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "god_tree_additional_generation_condition",
+      "metadata": {
+        "return_type": "LOGIC",
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "GodTree",
+      "type": "structure",
+      "sortid": 5,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "god_tree"
     }
   ],
-  "variable_elements": [],
+  "variable_elements": [
+    {
+      "name": "godTreeHasSpawned",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
+    }
+  ],
   "sound_elements": [],
   "language_map": {
     "en_us": {
