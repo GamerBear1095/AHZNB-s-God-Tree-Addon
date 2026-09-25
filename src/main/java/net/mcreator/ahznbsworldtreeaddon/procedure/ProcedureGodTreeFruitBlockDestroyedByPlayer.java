@@ -1,14 +1,14 @@
 package net.mcreator.ahznbsworldtreeaddon.procedure;
 
 import net.minecraft.world.World;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.item.ItemStack;
 import net.minecraft.init.Items;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.Entity;
-import net.narutomod.item.ItemChakraFruit;
-
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.mcreator.ahznbsworldtreeaddon.ElementsAhznbsworldtreeaddonMod;
 
 import java.util.Map;
@@ -47,7 +47,7 @@ public class ProcedureGodTreeFruitBlockDestroyedByPlayer extends ElementsAhznbsw
 		World world = (World) dependencies.get("world");
 		if ((!((entity instanceof EntityPlayer) ? ((EntityPlayer) entity).capabilities.isCreativeMode : false))) {
 			if (!world.isRemote) {
-				EntityItem entityToSpawn = new EntityItem(world, x, y, z, new ItemStack(new ItemChakraFruit(), (int) (1)));
+				EntityItem entityToSpawn = new EntityItem(world, x, y, z, new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("narutomod:chakrafruit")),  1));
 				entityToSpawn.setPickupDelay(10);
 				world.spawnEntity(entityToSpawn);
 			}
