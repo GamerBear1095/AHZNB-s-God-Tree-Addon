@@ -18,13 +18,56 @@
       "locked_code": false,
       "ids": {},
       "registry_name": "god_tree_fruit_loot_table"
+    },
+    {
+      "name": "WorldTreeAddon",
+      "type": "tab",
+      "sortid": 3,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "world_tree_addon"
+    },
+    {
+      "name": "GodTreeFruitBlockDestroyedByPlayer",
+      "type": "procedure",
+      "sortid": 4,
+      "compiles": false,
+      "locked_code": true,
+      "ids": {},
+      "registry_name": "god_tree_fruit_block_destroyed_by_player",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
     }
   ],
   "variable_elements": [],
   "sound_elements": [],
   "language_map": {
     "en_us": {
-      "tile.god_tree_fruit.name": "God Tree Fruit"
+      "tile.god_tree_fruit.name": "God Tree Fruit",
+      "itemGroup.tabworld_tree_addon": "World Tree Addon"
     }
   },
   "foldersRoot": {
@@ -37,13 +80,19 @@
     "version": "1.0.0",
     "author": "admin, MCreator",
     "websiteURL": "https://mcreator.net",
+    "license": "MIT License",
     "disableForgeVersionCheck": true,
-    "serverSideOnly": false,
-    "requiredMods": [],
-    "dependencies": [],
+    "serverSideOnly": true,
+    "requiredMods": [
+      "narutomod"
+    ],
+    "dependencies": [
+      "narutomod"
+    ],
     "dependants": [],
     "mcreatorDependencies": [],
-    "currentGenerator": "1.12.2",
+    "currentGenerator": "forge-1.12.2",
+    "credits": "Created using mod maker MCreator - https://mcreator.net/about",
     "modElementsPackage": "net.mcreator.ahznbsworldtreeaddon",
     "lockBaseModFiles": false
   },

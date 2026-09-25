@@ -12,9 +12,13 @@
     "authorList": [
       "admin, MCreator"
     ],
-    "dependencies": [],
+    "dependencies": [
+      "narutomod"
+    ],
     "dependants": [],
-    "requiredMods": [],
+    "requiredMods": [
+      "narutomod"
+    ],
     "useDependencyInformation": "true"
   }
 ]
