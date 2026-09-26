@@ -5,6 +5,7 @@ import net.minecraft.world.World;
 import net.mcreator.ahznbsworldtreeaddon.ElementsAhznbsworldtreeaddonMod;
 import net.mcreator.ahznbsworldtreeaddon.AhznbsworldtreeaddonModVariables;
 
+import java.util.Random;
 import java.util.Map;
 
 @ElementsAhznbsworldtreeaddonMod.ModElement.Tag
@@ -29,9 +30,11 @@ public class ProcedureGodTreeAdditionalGenerationCondition extends ElementsAhznb
 		int x = (int) dependencies.get("x");
 		int z = (int) dependencies.get("z");
 		World world = (World) dependencies.get("world");
-		if (((x <= ((world.getSpawnPoint().getX()) - (-2000))) || (x >= ((world.getSpawnPoint().getX()) + 2000)))) {
-			if (((z <= ((world.getSpawnPoint().getZ()) - (-2000))) || (z >= ((world.getSpawnPoint().getZ()) - 2000)))) {
-				return (!(AhznbsworldtreeaddonModVariables.MapVariables.get(world).godTreeHasSpawned));
+		double Random = 0;
+		if (((x == ((world.getSpawnPoint().getX()) + (AhznbsworldtreeaddonModVariables.MapVariables.get(world).treeSpawnLocX)))
+				&& (z == ((world.getSpawnPoint().getZ()) + (AhznbsworldtreeaddonModVariables.MapVariables.get(world).treeSpawnLocZ))))) {
+			if ((!(AhznbsworldtreeaddonModVariables.MapVariables.get(world).godTreeHasSpawned))) {
+				return (true);
 			}
 		}
 		return (false);

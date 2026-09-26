@@ -14,6 +14,9 @@ import net.minecraft.client.Minecraft;
 public class AhznbsworldtreeaddonModVariables {
 	public static class MapVariables extends WorldSavedData {
 		public static final String DATA_NAME = "ahznbsworldtreeaddon_mapvars";
+		public boolean WorldGenerated = false;
+		public double treeSpawnLocZ = 1000.0;
+		public double treeSpawnLocX = 1000.0;
 		public boolean godTreeHasSpawned = false;
 		public MapVariables() {
 			super(DATA_NAME);
@@ -25,11 +28,17 @@ public class AhznbsworldtreeaddonModVariables {
 
 		@Override
 		public void readFromNBT(NBTTagCompound nbt) {
+			WorldGenerated = nbt.getBoolean("WorldGenerated");
+			treeSpawnLocZ = nbt.getDouble("treeSpawnLocZ");
+			treeSpawnLocX = nbt.getDouble("treeSpawnLocX");
 			godTreeHasSpawned = nbt.getBoolean("godTreeHasSpawned");
 		}
 
 		@Override
 		public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+			nbt.setBoolean("WorldGenerated", WorldGenerated);
+			nbt.setDouble("treeSpawnLocZ", treeSpawnLocZ);
+			nbt.setDouble("treeSpawnLocX", treeSpawnLocX);
 			nbt.setBoolean("godTreeHasSpawned", godTreeHasSpawned);
 			return nbt;
 		}

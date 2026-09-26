@@ -112,9 +112,44 @@
       "locked_code": false,
       "ids": {},
       "registry_name": "god_tree"
+    },
+    {
+      "name": "GodTreeRandomNumberGen",
+      "type": "procedure",
+      "sortid": 6,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "god_tree_random_number_gen",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
     }
   ],
   "variable_elements": [
+    {
+      "name": "WorldGenerated",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
+    },
+    {
+      "name": "treeSpawnLocZ",
+      "type": "number",
+      "scope": "map",
+      "value": "1000.0"
+    },
+    {
+      "name": "treeSpawnLocX",
+      "type": "number",
+      "scope": "map",
+      "value": "1000.0"
+    },
     {
       "name": "godTreeHasSpawned",
       "type": "logic",
